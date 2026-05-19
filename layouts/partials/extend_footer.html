@@ -1,0 +1,47 @@
+{{- /* Scroll progress bar + reveal animations */ -}}
+<div id="reading-progress"></div>
+
+<script>
+(function () {
+  const bar = document.getElementById('reading-progress');
+  function update() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const total = h.scrollHeight - h.clientHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+(function () {
+  const targets = document.querySelectorAll('.post-entry, .first-entry, .home-info');
+  if (!('IntersectionObserver' in window) || targets.length === 0) return;
+  targets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(el => io.observe(el));
+})();
+
+(function () {
+  const blocks = document.querySelectorAll('.post-content pre');
+  blocks.forEach(pre => {
+    const code = pre.querySelector('code');
+    if (!code) return;
+    const cls = [...code.classList].find(c => c.startsWith('language-'));
+    if (cls) {
+      const label = document.createElement('span');
+      label.className = 'code-lang-label';
+      label.textContent = cls.replace('language-', '');
+      pre.appendChild(label);
+    }
+  });
+})();
+</script>

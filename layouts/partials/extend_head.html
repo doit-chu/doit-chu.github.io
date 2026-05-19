@@ -1,0 +1,15 @@
+{{- /* Scroll progress bar */ -}}
+<style>
+  #reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: currentColor;
+    color: #1a1a1a;
+    z-index: 9999;
+    transition: width 0.05s linear;
+  }
+  .dark #reading-progress { color: rgba(255, 255, 255, 0.85); }
+</style>

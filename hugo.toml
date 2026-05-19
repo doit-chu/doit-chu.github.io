@@ -1,20 +1,74 @@
 baseURL = 'https://doit-chu.github.io/'
 languageCode = 'ko-kr'
-title = 'doit-chu의 기술 블로그'
+title = 'DO IT CHU'
 theme = 'PaperMod'
 
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
 [params]
+  env = 'production'
+  title = 'DO IT CHU'
+  description = '데이터·AI·엔지니어링 학습 로그'
+  author = 'doit-chu'
   defaultTheme = 'auto'
+  disableThemeToggle = false
+
   ShowReadingTime = true
   ShowShareButtons = true
-  ShowCodeCopyButtons = true
-  ShowToc = true
-  ShowBreadCrumbs = true
   ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  ShowToc = true
+  TocOpen = true
+  ShowLastMod = true
+  ShowAllPagesInArchive = true
+  ShowScrollToTop = true
+  ShowFullTextinRSS = true
+  comments = false
+
+  [params.homeInfoParams]
+    Title = "DO IT CHU 👋"
+    Content = "기록용."
+
+  [params.assets]
+    disableHLJS = true
+    favicon = '/favicon.ico'
+
+  [params.cover]
+    hidden = false
+    hiddenInList = false
+    hiddenInSingle = false
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ['title', 'permalink', 'summary', 'content']
 
 [markup.highlight]
-  style = 'github'
-  lineNos = true
+  style = 'github-dark'
+  lineNos = false
+  codeFences = true
+  guessSyntax = true
+  noClasses = false
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
 
 [[menu.main]]
   identifier = 'posts'
@@ -23,13 +77,25 @@ theme = 'PaperMod'
   weight = 10
 
 [[menu.main]]
-  identifier = 'tags'
-  name = '태그'
-  url = '/tags/'
-  weight = 20
-
-[[menu.main]]
   identifier = 'archives'
   name = '아카이브'
   url = '/archives/'
+  weight = 20
+
+[[menu.main]]
+  identifier = 'categories'
+  name = '카테고리'
+  url = '/categories/'
+  weight = 25
+
+[[menu.main]]
+  identifier = 'tags'
+  name = '태그'
+  url = '/tags/'
   weight = 30
+
+[[menu.main]]
+  identifier = 'search'
+  name = '검색'
+  url = '/search/'
+  weight = 40
