@@ -639,6 +639,15 @@ code, pre, .post-content code {
 .dark .chip-purple { background: rgba(139, 92, 246, 0.18); border-color: rgba(139, 92, 246, 0.4); color: #c4b5fd; }
 .dark .chip-gray   { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.7); }
 
+/* ── 번호 목록 변형 (1) 2) 3)) ─────────────────── */
+@counter-style paren-decimal {
+  system: extends decimal;
+  suffix: ") ";
+}
+.post-content ol.paren {
+  list-style-type: paren-decimal;
+}
+
 /* ── HIGHLIGHT (형광펜) ─────────────────── */
 .post-content mark,
 mark {

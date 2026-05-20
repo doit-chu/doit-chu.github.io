@@ -1,0 +1,51 @@
+{{- /* 카테고리별 이전/다음 글 네비게이션 */ -}}
+{{- $context := . -}}
+{{- $currentCategory := index .Params.categories 0 | default "" -}}
+
+{{- $pagesInCategory := slice -}}
+{{- if $currentCategory -}}
+  {{- range where (where .Site.RegularPages "Type" "in" site.Params.mainSections) "Params.categories" "intersect" (slice $currentCategory) -}}
+    {{- $pagesInCategory = $pagesInCategory | append . -}}
+  {{- end -}}
+{{- else -}}
+  {{- $pagesInCategory = where .Site.RegularPages "Type" "in" site.Params.mainSections -}}
+{{- end -}}
+
+{{- $pagesInCategory = sort $pagesInCategory "Date" "desc" -}}
+
+{{- $currentIndex := -1 -}}
+{{- range $i, $p := $pagesInCategory -}}
+  {{- if eq $p.RelPermalink $context.RelPermalink -}}
+    {{- $currentIndex = $i -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $next := "" -}}
+{{- $prev := "" -}}
+{{- if ge $currentIndex 0 -}}
+  {{- if gt $currentIndex 0 -}}
+    {{- $next = index $pagesInCategory (sub $currentIndex 1) -}}
+  {{- end -}}
+  {{- if lt $currentIndex (sub (len $pagesInCategory) 1) -}}
+    {{- $prev = index $pagesInCategory (add $currentIndex 1) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if or $next $prev }}
+<nav class="paginav">
+  {{- with $prev }}
+  <a class="prev" href="{{ .Permalink }}">
+    <span class="title">« {{ i18n "prev_page" | default "이전 글" }}{{ with $currentCategory }} <small>({{ . }})</small>{{ end }}</span>
+    <br>
+    <span>{{ .Name }}</span>
+  </a>
+  {{- end }}
+  {{- with $next }}
+  <a class="next" href="{{ .Permalink }}">
+    <span class="title">{{ i18n "next_page" | default "다음 글" }}{{ with $currentCategory }} <small>({{ . }})</small>{{ end }} »</span>
+    <br>
+    <span>{{ .Name }}</span>
+  </a>
+  {{- end }}
+</nav>
+{{- end }}
