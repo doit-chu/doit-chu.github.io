@@ -1,0 +1,7 @@
+{{- $title := .Get 0 | default "펼치기" -}}
+<details>
+<summary>{{ $title }}</summary>
+
+{{ .Inner | markdownify }}
+
+</details>

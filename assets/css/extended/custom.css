@@ -117,6 +117,15 @@ body {
   line-height: 1.85;
 }
 
+.post-content p {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.post-content p + p {
+  margin-top: 1.4em;
+}
+
 .post-content a {
   color: var(--primary);
   text-decoration: none;
@@ -322,6 +331,220 @@ code, pre, .post-content code {
   border-top: 1px solid var(--border);
   margin-top: 4em;
   padding-top: 2em;
+}
+
+/* ── CATEGORY TREE ─────────────────── */
+.cat-tree {
+  margin: 2em 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.cat-tree__root {
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding-bottom: 0.8em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.2em;
+}
+.cat-tree__parent {
+  margin: 1em 0;
+}
+.cat-tree__parent > a,
+.cat-tree__parent > .cat-tree__name--noLink {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.cat-tree__children {
+  list-style: none;
+  margin: 0.4em 0 0 0;
+  padding-left: 1.2em;
+}
+.cat-tree__children li {
+  margin: 0.2em 0;
+}
+.cat-tree__children a {
+  font-weight: 400;
+  color: var(--secondary);
+}
+.cat-tree__link {
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+.cat-tree__link:hover { opacity: 0.65; }
+.cat-tree__dash {
+  display: inline-block;
+  width: 1.2em;
+  color: var(--secondary);
+}
+.cat-tree__count {
+  color: var(--secondary);
+  font-weight: 400;
+  margin-left: 0.3em;
+  font-size: 0.92em;
+}
+
+/* ── DETAILS (접히는 박스) ─────────────────── */
+.post-content details {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8em 1.2em;
+  margin: 1.5em 0;
+  background: var(--code-bg);
+  transition: background 0.2s ease;
+}
+.post-content details[open] {
+  padding-bottom: 1.2em;
+}
+.post-content details summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  position: relative;
+  padding-left: 1.4em;
+  user-select: none;
+}
+.post-content details summary::-webkit-details-marker { display: none; }
+.post-content details summary::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s ease;
+  color: var(--secondary);
+}
+.post-content details[open] summary::before {
+  transform: rotate(90deg);
+}
+.post-content details > *:not(summary) {
+  margin-top: 0.8em;
+}
+
+/* ── CALLOUT 박스 ─────────────────── */
+.callout {
+  border-radius: 10px;
+  padding: 1em 1.2em 1em 3.2em;
+  margin: 1.5em 0;
+  border-left: 4px solid var(--primary);
+  background: var(--code-bg);
+  position: relative;
+  line-height: 1.7;
+}
+.callout::before {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  font-size: 1.2em;
+  line-height: 1;
+}
+.callout p:first-child { margin-top: 0; }
+.callout p:last-child  { margin-bottom: 0; }
+
+.callout-info    { border-left-color: #3b82f6; }
+.callout-info::before    { content: "💡"; }
+
+.callout-tip     { border-left-color: #10b981; }
+.callout-tip::before     { content: "✅"; }
+
+.callout-warning { border-left-color: #f59e0b; }
+.callout-warning::before { content: "⚠️"; }
+
+.callout-danger  { border-left-color: #ef4444; }
+.callout-danger::before  { content: "🚫"; }
+
+.callout-note    { border-left-color: var(--muted); }
+.callout-note::before    { content: "📝"; }
+
+.callout-title {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+/* ── TABLE 보강 ─────────────────── */
+.post-content table {
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+.post-content thead {
+  background: var(--code-bg);
+}
+.post-content th {
+  padding: 0.8em 1em;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+.post-content td {
+  padding: 0.7em 1em;
+  border-bottom: 1px solid var(--border);
+}
+.post-content tbody tr:last-child td {
+  border-bottom: none;
+}
+.post-content tbody tr:hover {
+  background: var(--code-bg);
+}
+
+/* ── FIGURE (이미지 + 캡션) ─────────────────── */
+.post-content figure {
+  margin: 2em auto;
+  text-align: center;
+}
+.post-content figure img {
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 8px;
+}
+.post-content figure figcaption {
+  margin-top: 0.6em;
+  font-size: 0.88rem;
+  color: var(--secondary);
+  font-style: italic;
+}
+
+/* ── CHIP / BADGE ─────────────────── */
+.chip {
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 999px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  line-height: 1.5;
+}
+.chip-blue   { background: #dbeafe; border-color: #93c5fd; color: #1e40af; }
+.chip-green  { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+.chip-yellow { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+.chip-red    { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.chip-purple { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; }
+.chip-gray   { background: #f3f4f6; border-color: #d1d5db; color: #374151; }
+
+.dark .chip-blue   { background: rgba(59, 130, 246, 0.18); border-color: rgba(59, 130, 246, 0.4); color: #93c5fd; }
+.dark .chip-green  { background: rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.4); color: #6ee7b7; }
+.dark .chip-yellow { background: rgba(245, 158, 11, 0.18); border-color: rgba(245, 158, 11, 0.4); color: #fcd34d; }
+.dark .chip-red    { background: rgba(239, 68, 68, 0.18); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; }
+.dark .chip-purple { background: rgba(139, 92, 246, 0.18); border-color: rgba(139, 92, 246, 0.4); color: #c4b5fd; }
+.dark .chip-gray   { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.7); }
+
+/* ── HIGHLIGHT (형광펜) ─────────────────── */
+.post-content mark,
+mark {
+  background: linear-gradient(180deg, transparent 60%, #fef08a 60%);
+  padding: 0 2px;
+  border-radius: 2px;
+  color: inherit;
+}
+.dark .post-content mark,
+.dark mark {
+  background: linear-gradient(180deg, transparent 60%, rgba(250, 204, 21, 0.45) 60%);
+  color: inherit;
 }
 
 /* ── THEME TOGGLE ─────────────────── */
