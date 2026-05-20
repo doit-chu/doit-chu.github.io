@@ -15,6 +15,11 @@
   src: url('https://cdn.jsdelivr.net/gh/fonts-archive/SeoulNamsan/SeoulNamsan-Bold.woff2') format('woff2');
   font-weight: 700; font-style: normal; font-display: swap;
 }
+@font-face {
+  font-family: 'SeoulNamsan';
+  src: url('https://cdn.jsdelivr.net/gh/fonts-archive/SeoulNamsan/SeoulNamsan-ExtraBold.woff2') format('woff2');
+  font-weight: 800; font-style: normal; font-display: swap;
+}
 
 :root {
   --pretendard: 'SeoulNamsan', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -45,9 +50,15 @@
 /* ── BASE ─────────────────── */
 body {
   font-family: var(--pretendard);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.005em;
   line-height: 1.75;
+}
+
+.post-content strong,
+.post-content b {
+  font-weight: 800;
 }
 
 /* ── HEADER ─────────────────── */
@@ -212,6 +223,101 @@ code, pre, .post-content code {
   border: 1px solid var(--border);
   overflow-x: auto;
   position: relative;
+}
+
+/* note1: 점선 박스 */
+.note1-box {
+  background: transparent;
+  border: 1.5px dashed rgba(0, 0, 0, 0.22);
+  border-radius: 8px;
+  padding: 1em 1.3em;
+  margin: 1.5em 0;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+.dark .note1-box {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.note1-box > *:first-child { margin-top: 0; }
+.note1-box > *:last-child  { margin-bottom: 0; }
+
+/* note2: 카드 + 그림자 */
+.note2-box {
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2em 1.5em;
+  margin: 1.8em 0;
+  font-size: 0.96rem;
+  line-height: 1.75;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+.dark .note2-box {
+  background: var(--entry);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.note2-box > *:first-child { margin-top: 0; }
+.note2-box > *:last-child  { margin-bottom: 0; }
+
+/* note3: 크림(아이보리) — 종이 느낌 */
+.note3-box {
+  background: #fbf6ec;
+  color: #5a4a36;
+  border: none;
+  border-radius: 10px;
+  padding: 1.1em 1.4em;
+  margin: 1.5em 0;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+.dark .note3-box {
+  background: rgba(217, 167, 96, 0.10);
+  color: rgba(255, 235, 195, 0.85);
+}
+.note3-box > *:first-child { margin-top: 0; }
+.note3-box > *:last-child  { margin-bottom: 0; }
+.note3-box code:not(pre code) { background: rgba(0, 0, 0, 0.05); }
+.dark .note3-box code:not(pre code) { background: rgba(255, 255, 255, 0.08); }
+
+/* note4: 더스티 핑크 */
+.note4-box {
+  background: #f5ecec;
+  color: #5a3a3a;
+  border: none;
+  border-radius: 10px;
+  padding: 1.1em 1.4em;
+  margin: 1.5em 0;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+.dark .note4-box {
+  background: rgba(217, 140, 140, 0.10);
+  color: rgba(245, 215, 215, 0.85);
+}
+.note4-box > *:first-child { margin-top: 0; }
+.note4-box > *:last-child  { margin-bottom: 0; }
+.note4-box code:not(pre code) { background: rgba(0, 0, 0, 0.05); }
+.dark .note4-box code:not(pre code) { background: rgba(255, 255, 255, 0.08); }
+
+/* 들여쓰기 코드블록 (chroma 클래스 없음) — 메모 스타일 */
+.post-content pre:not(.chroma) {
+  background: var(--code-bg);
+  border: none !important;
+  border-radius: 8px;
+  padding: 1.1em 1.3em;
+  font-family: var(--pretendard);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--secondary);
+  white-space: pre-wrap;
+}
+.post-content pre:not(.chroma) code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
 }
 
 .code-lang-label {

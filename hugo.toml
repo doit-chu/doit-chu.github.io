@@ -37,7 +37,7 @@ buildExpired = false
 
   [params.homeInfoParams]
     Title = "DO IT CHU 👋"
-    Content = "기록용."
+    Content = "기록용"
 
   [params.assets]
     disableHLJS = true
@@ -66,6 +66,12 @@ buildExpired = false
 
 [markup.goldmark.renderer]
   unsafe = true
+
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [["\\[", "\\]"], ["$$", "$$"]]
+    inline = [["\\(", "\\)"], ["$", "$"]]
 
 [outputs]
   home = ['HTML', 'RSS', 'JSON']

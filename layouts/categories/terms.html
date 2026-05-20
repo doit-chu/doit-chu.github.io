@@ -1,0 +1,82 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>카테고리</h1>
+</header>
+
+{{- /*
+계층 카테고리 렌더링:
+  - "Parent/Child" 형식이면 부모 아래 자식으로 표시
+  - 단일 이름이면 최상위로 표시
+  - 각 항목 옆에 글 수 (총합 포함)
+*/ -}}
+
+{{- $all := .Site.Taxonomies.categories -}}
+{{- $totalPosts := 0 -}}
+{{- range $name, $list := $all -}}
+  {{- $totalPosts = add $totalPosts (len $list) -}}
+{{- end -}}
+
+{{- /* Group categories by top-level parent */ -}}
+{{- $tree := dict -}}
+{{- range $name, $list := $all -}}
+  {{- $parts := split $name "/" -}}
+  {{- $parent := index $parts 0 -}}
+  {{- $children := dict -}}
+  {{- with index $tree $parent -}}
+    {{- $children = .children -}}
+  {{- end -}}
+  {{- if eq (len $parts) 1 -}}
+    {{- $tree = merge $tree (dict $parent (dict "self" (len $list) "children" $children)) -}}
+  {{- else -}}
+    {{- $childName := index $parts 1 -}}
+    {{- $children = merge $children (dict $childName (len $list)) -}}
+    {{- $existing := index $tree $parent -}}
+    {{- $selfCount := 0 -}}
+    {{- with $existing -}}{{- $selfCount = .self -}}{{- end -}}
+    {{- $tree = merge $tree (dict $parent (dict "self" $selfCount "children" $children)) -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="cat-tree">
+  <div class="cat-tree__root">
+    <span class="cat-tree__label">분류 전체보기</span>
+    <span class="cat-tree__count">({{ $totalPosts }})</span>
+  </div>
+
+  {{- range $parent, $node := $tree -}}
+    {{- $parentSlug := urlize $parent -}}
+    {{- $parentTotal := $node.self -}}
+    {{- range $cName, $cCount := $node.children -}}
+      {{- $parentTotal = add $parentTotal $cCount -}}
+    {{- end }}
+    <div class="cat-tree__parent">
+      {{- if gt $node.self 0 -}}
+        <a href="{{ "/categories/" | relURL }}{{ $parentSlug }}/" class="cat-tree__link">
+          <span class="cat-tree__name">{{ $parent }}</span>
+          <span class="cat-tree__count">({{ $parentTotal }})</span>
+        </a>
+      {{- else -}}
+        <span class="cat-tree__name cat-tree__name--noLink">{{ $parent }}</span>
+        <span class="cat-tree__count">({{ $parentTotal }})</span>
+      {{- end -}}
+
+      {{- if $node.children }}
+      <ul class="cat-tree__children">
+        {{- range $cName, $cCount := $node.children -}}
+          {{- $fullSlug := urlize (printf "%s/%s" $parent $cName) }}
+          <li>
+            <a href="{{ "/categories/" | relURL }}{{ $fullSlug }}/" class="cat-tree__link">
+              <span class="cat-tree__dash">─</span>
+              <span class="cat-tree__name">{{ $cName }}</span>
+              <span class="cat-tree__count">({{ $cCount }})</span>
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+  {{- end }}
+</div>
+
+{{- end }}

@@ -1,7 +1,8 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" -}}
-<figure>
-  <img src="{{ $src }}" alt="{{ $alt }}">
+{{- $width := .Get "width" -}}
+<figure{{ with $width }} style="max-width: {{ . }}; margin-left: auto; margin-right: auto;"{{ end }}>
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $width }} style="width: 100%;"{{ end }}>
   {{- with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
 </figure>
