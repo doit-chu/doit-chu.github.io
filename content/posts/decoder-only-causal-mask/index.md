@@ -1,5 +1,5 @@
 ---
-title: "Decoder-only Transformer와 Causal Mask"
+title: "GPT 아키텍처 기초 — Decoder-only와 Causal Mask"
 date: 2026-05-20T10:00:00+09:00
 draft: false
 categories: ["LLM/아키텍처"]
