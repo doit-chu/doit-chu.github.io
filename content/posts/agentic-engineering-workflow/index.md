@@ -2,7 +2,7 @@
 title: "Claude와 일하는 법 — 9가지 스킬과 R·P·I 워크플로우"
 date: 2026-05-22T10:00:00+09:00
 draft: false
-categories: ["Claude/활용 스킬"]
+categories: ["AI 활용"]
 tags: ["Claude", "워크플로우", "에이전틱", "AI"]
 summary: "에이전틱 엔지니어링 시대의 9가지 스킬과, 그걸 실제로 굴리는 Research → Planning → Implementation 워크플로우."
 ---

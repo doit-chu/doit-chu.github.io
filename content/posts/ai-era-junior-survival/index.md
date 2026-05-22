@@ -2,7 +2,7 @@
 title: "AI가 코드를 잘 짜는 시대, 주니어는 뭘 해야 할까"
 date: 2026-05-21T10:00:00+09:00
 draft: false
-categories: ["Claude/인사이트"]
+categories: ["AI 활용"]
 tags: ["AI", "주니어", "커리어", "Claude"]
 summary: "AI 시대에 주니어가 잃기 쉬운 것은 '코드 짤 줄 아는 능력'이 아니라 '실패 패턴을 직접 겪어본 경험'이다."
 ---
