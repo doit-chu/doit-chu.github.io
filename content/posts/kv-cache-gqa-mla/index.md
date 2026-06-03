@@ -1,6 +1,6 @@
 ---
 title: "KV cache, 그리고 GQA · MLA"
-date: 2026-05-20T11:00:00+09:00
+date: 2026-06-03T13:08:47+09:00
 draft: false
 categories: ["LLM/아키텍처"]
 tags: ["LLM", "KV cache", "GQA", "MLA", "Attention"]
