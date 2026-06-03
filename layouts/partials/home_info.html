@@ -1,0 +1,16 @@
+{{- with site.Params.homeInfoParams }}
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-chip">데이터 · AI · 엔지니어링 로그</div>
+    <h1 class="hero-title">
+      {{ .Title | markdownify }}
+    </h1>
+    <div class="hero-content">
+      {{ $opts := dict "display" "block" }}
+      {{ .Content | $.Page.RenderString $opts }}
+    </div>
+  </div>
+</section>
+{{- end -}}

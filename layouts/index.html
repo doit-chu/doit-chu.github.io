@@ -1,0 +1,65 @@
+{{- define "main" }}
+
+{{- if site.Params.homeInfoParams }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{/* ---------- 시리즈·카테고리 카드 섹션 ---------- */}}
+{{- $featured := slice
+    (dict "name" "LLM/아키텍처" "title" "LLM 기초" "desc" "트랜스포머·어텐션·KV cache 등 모델 내부" "icon" "🧠" "tint" "tint-llm")
+    (dict "name" "AI 활용"     "title" "AI 활용"  "desc" "Claude·에이전트·실전 워크플로우"        "icon" "🛠️" "tint" "tint-ai")
+}}
+
+<section class="series-cards">
+  <h2 class="series-cards-title">📚 시리즈</h2>
+  <div class="series-cards-grid">
+    {{- range $featured }}
+      {{- $name := .name }}
+      {{- $count := len (where site.RegularPages "Params.categories" "intersect" (slice $name)) }}
+      <a class="series-card {{ .tint }}" href="{{ "/categories/" | relLangURL }}{{ urlize $name }}/">
+        <div class="series-card-icon">{{ .icon }}</div>
+        <div class="series-card-body">
+          <div class="series-card-title">{{ .title }}</div>
+          <div class="series-card-desc">{{ .desc }}</div>
+          <div class="series-card-count">{{ $count }}편</div>
+        </div>
+      </a>
+    {{- end }}
+  </div>
+</section>
+
+{{/* ---------- 최근 글 목록 ---------- */}}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $paginator := .Paginate $pages }}
+
+<section class="recent-posts">
+  <h2 class="series-cards-title">🆕 최근 글</h2>
+
+  {{- range $index, $page := $paginator.Pages }}
+  <article class="post-entry">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">{{ .Title }}</h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+
+  {{- if gt $paginator.TotalPages 1 }}
+  {{- partial "pagination.html" . }}
+  {{- end }}
+</section>
+
+{{- end }}{{/* end main */}}

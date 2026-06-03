@@ -45,3 +45,14 @@
   });
 })();
 </script>
+
+{{- /* Mermaid: .mermaid 요소가 있는 페이지에서만 mermaid.js 동적 로드 */ -}}
+<script type="module">
+  if (document.querySelector('.mermaid')) {
+    const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+    const isDark = document.documentElement.dataset.theme === 'dark'
+      || (document.documentElement.dataset.theme !== 'light'
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+  }
+</script>

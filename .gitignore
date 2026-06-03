@@ -3,3 +3,7 @@ resources/
 .hugo_build.lock
 .DS_Store
 _migration/
+
+# excalidraw-to-png 로컬 도구 의존성
+.claude/tools/node_modules/
+.claude/tools/.render.html
